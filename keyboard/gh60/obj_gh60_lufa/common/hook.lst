@@ -1,0 +1,186 @@
+   1               		.file	"hook.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.text
+   8               	.Ltext0:
+   9               		.cfi_sections	.debug_frame
+  10               		.section	.text.hook_keyboard_loop,"ax",@progbits
+  11               		.weak	hook_keyboard_loop
+  13               	hook_keyboard_loop:
+  14               	.LFB12:
+  15               		.cfi_startproc
+  16               	/* prologue: function */
+  17               	/* frame size = 0 */
+  18               	/* stack size = 0 */
+  19               	.L__stack_usage = 0
+  20 0000 0895      		ret
+  21               		.cfi_endproc
+  22               	.LFE12:
+  24               		.section	.text.hook_matrix_change,"ax",@progbits
+  25               		.weak	hook_matrix_change
+  27               	hook_matrix_change:
+  28               	.LFB4:
+  29               		.file 1 "../../tmk_core/common/hook.c"
+   1:../../tmk_core/common/hook.c **** /*
+   2:../../tmk_core/common/hook.c **** Copyright 2016 Jun Wako <wakojun@gmail.com>
+   3:../../tmk_core/common/hook.c **** 
+   4:../../tmk_core/common/hook.c **** This program is free software: you can redistribute it and/or modify
+   5:../../tmk_core/common/hook.c **** it under the terms of the GNU General Public License as published by
+   6:../../tmk_core/common/hook.c **** the Free Software Foundation, either version 2 of the License, or
+   7:../../tmk_core/common/hook.c **** (at your option) any later version.
+   8:../../tmk_core/common/hook.c **** 
+   9:../../tmk_core/common/hook.c **** This program is distributed in the hope that it will be useful,
+  10:../../tmk_core/common/hook.c **** but WITHOUT ANY WARRANTY; without even the implied warranty of
+  11:../../tmk_core/common/hook.c **** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  12:../../tmk_core/common/hook.c **** GNU General Public License for more details.
+  13:../../tmk_core/common/hook.c **** 
+  14:../../tmk_core/common/hook.c **** You should have received a copy of the GNU General Public License
+  15:../../tmk_core/common/hook.c **** along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  16:../../tmk_core/common/hook.c **** */
+  17:../../tmk_core/common/hook.c **** 
+  18:../../tmk_core/common/hook.c **** #include "keyboard.h"
+  19:../../tmk_core/common/hook.c **** #include "hook.h"
+  20:../../tmk_core/common/hook.c **** 
+  21:../../tmk_core/common/hook.c **** /* -------------------------------------------------
+  22:../../tmk_core/common/hook.c ****  * Definitions of default hooks
+  23:../../tmk_core/common/hook.c ****  * ------------------------------------------------- */
+  24:../../tmk_core/common/hook.c **** 
+  25:../../tmk_core/common/hook.c **** __attribute__((weak))
+  26:../../tmk_core/common/hook.c **** void hook_keyboard_loop(void) {}
+  27:../../tmk_core/common/hook.c **** 
+  28:../../tmk_core/common/hook.c **** __attribute__((weak))
+  29:../../tmk_core/common/hook.c **** void hook_matrix_change(keyevent_t event) {
+  30               		.loc 1 29 0
+  31               		.cfi_startproc
+  32               		.loc 1 29 0
+  33 0000 CF93      		push r28
+  34               	.LCFI0:
+  35               		.cfi_def_cfa_offset 3
+  36               		.cfi_offset 28, -2
+  37 0002 DF93      		push r29
+  38               	.LCFI1:
+  39               		.cfi_def_cfa_offset 4
+  40               		.cfi_offset 29, -3
+  41 0004 00D0      		rcall .
+  42 0006 00D0      		rcall .
+  43 0008 1F92      		push __zero_reg__
+  44               	.LCFI2:
+  45               		.cfi_def_cfa_offset 9
+  46 000a CDB7      		in r28,__SP_L__
+  47 000c DEB7      		in r29,__SP_H__
+  48               	.LCFI3:
+  49               		.cfi_def_cfa_register 28
+  50               	/* prologue: function */
+  51               	/* frame size = 5 */
+  52               	/* stack size = 7 */
+  53               	.L__stack_usage = 7
+  54               	/* epilogue start */
+  30:../../tmk_core/common/hook.c ****     (void)event;
+  31:../../tmk_core/common/hook.c **** }
+  55               		.loc 1 31 0
+  56 000e 0F90      		pop __tmp_reg__
+  57 0010 0F90      		pop __tmp_reg__
+  58 0012 0F90      		pop __tmp_reg__
+  59 0014 0F90      		pop __tmp_reg__
+  60 0016 0F90      		pop __tmp_reg__
+  61 0018 DF91      		pop r29
+  62 001a CF91      		pop r28
+  63 001c 0895      		ret
+  64               		.cfi_endproc
+  65               	.LFE4:
+  67               		.section	.text.hook_default_layer_change,"ax",@progbits
+  68               		.weak	hook_default_layer_change
+  70               	hook_default_layer_change:
+  71               	.LFB10:
+  72               		.cfi_startproc
+  73               	/* prologue: function */
+  74               	/* frame size = 0 */
+  75               	/* stack size = 0 */
+  76               	.L__stack_usage = 0
+  77 0000 0895      		ret
+  78               		.cfi_endproc
+  79               	.LFE10:
+  81               		.section	.text.hook_layer_change,"ax",@progbits
+  82               		.weak	hook_layer_change
+  84               	hook_layer_change:
+  85               	.LFB6:
+  32:../../tmk_core/common/hook.c **** 
+  33:../../tmk_core/common/hook.c **** __attribute__((weak))
+  34:../../tmk_core/common/hook.c **** void hook_default_layer_change(uint32_t default_layer_state) {
+  35:../../tmk_core/common/hook.c ****     (void)default_layer_state;
+  36:../../tmk_core/common/hook.c **** }
+  37:../../tmk_core/common/hook.c **** 
+  38:../../tmk_core/common/hook.c **** __attribute__((weak))
+  39:../../tmk_core/common/hook.c **** void hook_layer_change(uint32_t layer_state) {
+  86               		.loc 1 39 0
+  87               		.cfi_startproc
+  88               	.LVL0:
+  89               	/* prologue: function */
+  90               	/* frame size = 0 */
+  91               	/* stack size = 0 */
+  92               	.L__stack_usage = 0
+  93 0000 0895      		ret
+  94               		.cfi_endproc
+  95               	.LFE6:
+  97               		.section	.text.hook_keyboard_leds_change,"ax",@progbits
+  98               		.weak	hook_keyboard_leds_change
+ 100               	hook_keyboard_leds_change:
+ 101               	.LFB7:
+  40:../../tmk_core/common/hook.c ****     (void)layer_state;
+  41:../../tmk_core/common/hook.c **** }
+  42:../../tmk_core/common/hook.c **** 
+  43:../../tmk_core/common/hook.c **** __attribute__((weak))
+  44:../../tmk_core/common/hook.c **** void hook_keyboard_leds_change(uint8_t led_status) {
+ 102               		.loc 1 44 0
+ 103               		.cfi_startproc
+ 104               	.LVL1:
+ 105               	/* prologue: function */
+ 106               	/* frame size = 0 */
+ 107               	/* stack size = 0 */
+ 108               	.L__stack_usage = 0
+  45:../../tmk_core/common/hook.c ****     keyboard_set_leds(led_status);
+ 109               		.loc 1 45 0
+ 110 0000 0C94 0000 		jmp keyboard_set_leds
+ 111               	.LVL2:
+ 112               		.cfi_endproc
+ 113               	.LFE7:
+ 115               		.section	.text.hook_bootmagic,"ax",@progbits
+ 116               		.weak	hook_bootmagic
+ 118               	hook_bootmagic:
+ 119               	.LFB8:
+  46:../../tmk_core/common/hook.c **** }
+  47:../../tmk_core/common/hook.c **** 
+  48:../../tmk_core/common/hook.c **** __attribute__((weak))
+  49:../../tmk_core/common/hook.c **** void hook_bootmagic(void) {}
+ 120               		.loc 1 49 0
+ 121               		.cfi_startproc
+ 122               	/* prologue: function */
+ 123               	/* frame size = 0 */
+ 124               	/* stack size = 0 */
+ 125               	.L__stack_usage = 0
+ 126 0000 0895      		ret
+ 127               		.cfi_endproc
+ 128               	.LFE8:
+ 130               		.text
+ 131               	.Letext0:
+ 132               		.file 2 "/usr/avr/include/stdint.h"
+ 133               		.file 3 "../../tmk_core/common/keyboard.h"
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 hook.c
+     /tmp/ccGdv2rn.s:2      *ABS*:000000000000003e __SP_H__
+     /tmp/ccGdv2rn.s:3      *ABS*:000000000000003d __SP_L__
+     /tmp/ccGdv2rn.s:4      *ABS*:000000000000003f __SREG__
+     /tmp/ccGdv2rn.s:5      *ABS*:0000000000000000 __tmp_reg__
+     /tmp/ccGdv2rn.s:6      *ABS*:0000000000000001 __zero_reg__
+     /tmp/ccGdv2rn.s:13     .text.hook_keyboard_loop:0000000000000000 hook_keyboard_loop
+     /tmp/ccGdv2rn.s:27     .text.hook_matrix_change:0000000000000000 hook_matrix_change
+     /tmp/ccGdv2rn.s:70     .text.hook_default_layer_change:0000000000000000 hook_default_layer_change
+     /tmp/ccGdv2rn.s:84     .text.hook_layer_change:0000000000000000 hook_layer_change
+     /tmp/ccGdv2rn.s:100    .text.hook_keyboard_leds_change:0000000000000000 hook_keyboard_leds_change
+     /tmp/ccGdv2rn.s:118    .text.hook_bootmagic:0000000000000000 hook_bootmagic
+
+UNDEFINED SYMBOLS
+keyboard_set_leds
